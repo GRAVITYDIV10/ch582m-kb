@@ -1,0 +1,10 @@
+EVT/
+MRS_Toolchain_Linux_x64_V1.92/
+fw.bin
+fw.elf
+fw.dis
+fw.map
+compile_commands.json
+.cache/
+wchisp-linux-x64/
+*~

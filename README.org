@@ -1,0 +1,33 @@
+* CH582 KEYBOARD FIRMWARE
+
+* VENDOR SDK
+
+https://www.wch.cn/downloads/CH583EVT_ZIP.html
+
+#+BEGIN_SRC shell
+unzip -O gb2312 CH583EVT.ZIP
+#+END_SRC
+
+* VENDOR TOOLCHAIN & SWD FLASH TOOL
+
+http://www.mounriver.com/download
+
+#+BEGIN_SRC shell
+tar xvf MRS_Toolchain_Linux_x64_V1.92.tar.xz
+#+END_SRC
+
+* USB FLASH TOOL
+
+https://github.com/ch32-rs/wchisp/releases/tag/nightly
+
+* BUILD INSTRUCTION
+
+#+BEGIN_SRC shell
+make
+#+END_SRC
+
+* FLASH INSTRUCTION
+
+#+BEGIN_SRC shell
+make flash
+#+END_SRC
