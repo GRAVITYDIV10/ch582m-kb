@@ -79,10 +79,10 @@
 #define BLE_MAC                             FALSE
 #endif
 #ifndef DCDC_ENABLE
-#define DCDC_ENABLE                         FALSE
+#define DCDC_ENABLE                         TRUE
 #endif
 #ifndef HAL_SLEEP
-#define HAL_SLEEP                           FALSE
+#define HAL_SLEEP                           TRUE
 #endif
 #ifndef SLEEP_RTC_MIN_TIME                   
 #define SLEEP_RTC_MIN_TIME                  US_TO_RTC(1000)
