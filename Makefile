@@ -1,16 +1,9 @@
 SRCS += \
-app/hidkbd_main.c \
-app/hidkbd.c \
-app/Profile/hiddev.c \
-app/Profile/hidkbdservice.c \
-app/Profile/battservice.c \
-app/Profile/scanparamservice.c \
-app/Profile/devinfoservice.c \
+app/ble.c \
+app/main.c \
 
 INCS += \
 -I app/ \
--I app/include \
--I app/Profile/include \
 
 CH58X_SDK ?= ./EVT/EXAM
 TOOLCHAIN ?= ./MRS_Toolchain_Linux_x64_V1.92/RISC-V_Embedded_GCC12/bin/
@@ -97,7 +90,12 @@ CFLAGS += \
 CFLAGS += \
 	-DDEBUG=1 \
 
+reflash: clean all flash info
+
 all: clean bin dis
+
+info:
+	$(SZ) fw.elf
 
 elf:
 	$(CC) $(CFLAGS) $(INCS) $(SRCS) $(LIBS) -o fw.elf
@@ -118,21 +116,42 @@ patch:
 
 OPENOCD ?= ./MRS_Toolchain_Linux_x64_V1.92/OpenOCD/bin/openocd -f MRS_Toolchain_Linux_x64_V1.92/OpenOCD/bin/wch-riscv.cfg
 
-flash: erase bin
+ocd-flash: erase bin
 	$(OPENOCD) -c init -c halt -c 'program fw.elf' -c exit
 	$(OPENOCD) -c init -c halt -c 'wlink_reset_resume' -c exit
 
-verify:
+ocd-verify:
 	$(OPENOCD) -c init -c halt -c 'verify_image fw.elf' -c exit
 
-erase:
+ocd-erase:
 	$(OPENOCD) -c init -c halt -c 'flash erase_sector wch_riscv 0 last' -c exit
 
-reset:
+ocd-reset:
 	$(OPENOCD) -c init -c halt -c 'wlink_reset_resume' -c exit
 
-dbgserver:
+ocd-dbgserver:
 	$(OPENOCD)
+
+WCHISP ?= wchisp
+
+dbgen:
+	$(WCHISP) config enable-debug
+
+WLINK ?= wlink --chip CH582 --speed high
+
+erase:
+	$(WLINK) erase
+
+rstpwr:
+	$(WLINK) set-power disable3v3
+	sleep 1
+	$(WLINK) set-power enable3v3
+
+flash: bin
+	$(WLINK) flash fw.bin
+
+reset:
+	$(WLINK) reset
 
 dbgclient: elf
 	$(GDB) fw.elf --init-eval-command="target remote localhost:3333"

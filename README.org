@@ -16,6 +16,10 @@ http://www.mounriver.com/download
 tar xvf MRS_Toolchain_Linux_x64_V1.92.tar.xz
 #+END_SRC
 
+* WCHLINK FLASH TOOL
+
+https://github.com/ch32-rs/wlink
+
 * USB FLASH TOOL
 
 https://github.com/ch32-rs/wchisp/releases/tag/nightly

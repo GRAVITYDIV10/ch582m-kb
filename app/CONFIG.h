@@ -82,7 +82,7 @@
 #define DCDC_ENABLE                         TRUE
 #endif
 #ifndef HAL_SLEEP
-#define HAL_SLEEP                           TRUE
+#define HAL_SLEEP                           FALSE
 #endif
 #ifndef SLEEP_RTC_MIN_TIME                   
 #define SLEEP_RTC_MIN_TIME                  US_TO_RTC(1000)
@@ -136,13 +136,13 @@
 #define BLE_TX_NUM_EVENT                    1
 #endif
 #ifndef BLE_TX_POWER
-#define BLE_TX_POWER                        LL_TX_POWEER_0_DBM
+#define BLE_TX_POWER                        LL_TX_POWEER_6_DBM
 #endif
 #ifndef PERIPHERAL_MAX_CONNECTION
-#define PERIPHERAL_MAX_CONNECTION           1
+#define PERIPHERAL_MAX_CONNECTION 1
 #endif
 #ifndef CENTRAL_MAX_CONNECTION
-#define CENTRAL_MAX_CONNECTION              3
+#define CENTRAL_MAX_CONNECTION 1
 #endif
 
 extern uint32_t MEM_BUF[BLE_MEMHEAP_SIZE / 4];
