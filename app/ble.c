@@ -664,7 +664,7 @@ static void peripheralTestPadnNotify(uint16_t connHandle, uint8_t *pValue,
 				    NULL, 0);
 	tmos_memcpy(noti.pValue, pValue, noti.len);
 	if (TestPadn_Notify(connHandle, &noti) != SUCCESS) {
-		PANIC();
+		PANIC(); // tx queue full, other notification delay is too small
 		GATT_bm_free((gattMsg_t *)&noti, ATT_HANDLE_VALUE_NOTI);
 	}
 }
@@ -878,7 +878,7 @@ bStatus_t SysInfoSysClock_Notify(uint16_t connHandle,
 		// Set the handle
 		// C language not support label in array
 		// we need compute this index by hand....
-		pNoti->handle = TestAttrTbl[11].handle;
+		pNoti->handle = SysInfoAttrTbl[5].handle;
 
 		// Send the notification
 		return GATT_Notification(connHandle, pNoti, FALSE);
