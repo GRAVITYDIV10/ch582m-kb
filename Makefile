@@ -1,9 +1,22 @@
 SRCS += \
-app/ble.c \
 app/main.c \
+
+SRCS += \
+ble/ble.c \
+ble/ble_sysinfo_svc.c \
+ble/ble_console_svc.c \
+
+SRCS += \
+lib/fifo8.c \
+
+SRCS += \
+forth/stepforth.c \
 
 INCS += \
 -I app/ \
+-I lib/ \
+-I ble/ \
+-I forth/ \
 
 CH58X_SDK ?= ./EVT/EXAM
 TOOLCHAIN ?= ./MRS_Toolchain_Linux_x64_V1.92/RISC-V_Embedded_GCC12/bin/
